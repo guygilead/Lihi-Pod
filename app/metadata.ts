@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
 
-/** Production URL — override via NEXT_PUBLIC_SITE_URL. Replace before launch. */
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://lihi-gilad.co.il";
+/**
+ * Production URL — override via NEXT_PUBLIC_SITE_URL.
+ * Tolerates a bare host (e.g. "gilead.co.il") by adding https:// and strips
+ * trailing slashes, so `new URL(SITE_URL)` never throws at build time.
+ */
+function resolveSiteUrl(): string {
+  const raw = (
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.gilead.co.il"
+  ).trim();
+  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+  return withScheme.replace(/\/+$/, "");
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 const TITLE = "ליהיא שטויר גלעד | הפקת פודקאסטים לחברות וארגונים";
 const DESCRIPTION =
