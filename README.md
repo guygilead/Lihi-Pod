@@ -1,8 +1,8 @@
-# ליהיא שטויר גלעד — אתר שיווקי להפקת פודקאסטים לחברות
+# ליהיא שטויאר גלעד — אתר שיווקי להפקת פודקאסטים לחברות
 
-אתר תדמית ושיווק (עברית, RTL) לשירות הפקת פודקאסטים ארגוניים מקצה לקצה של ליהיא שטויר גלעד.
+אתר תדמית ושיווק (עברית, RTL) לשירות הפקת פודקאסטים ארגוניים מקצה לקצה של ליהיא שטויאר גלעד.
 
-A premium, Hebrew / RTL marketing website for Lihi Shtoyer Gilad's done‑for‑you
+A premium, Hebrew / RTL marketing website for Lihi Shtoyer Gilead's done‑for‑you
 corporate podcast production service. Built with Next.js (App Router),
 TypeScript and Tailwind CSS v4.
 

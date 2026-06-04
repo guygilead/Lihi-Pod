@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "ליהיא שטויר גלעד — הפקת פודקאסטים לחברות",
+  name: "ליהיא שטויאר גלעד — הפקת פודקאסטים לחברות",
   description:
     "שירות מלא להפקת פודקאסט מקצועי לחברות וארגונים: אסטרטגיה, כתיבת תוכן, ראיונות, צילום, הקלטה, עריכה ונכסי תוכן.",
   url: SITE_URL,
@@ -23,7 +23,7 @@ const jsonLd = {
   serviceType: "הפקת פודקאסטים ארגוניים",
   founder: {
     "@type": "Person",
-    name: "ליהיא שטויר גלעד",
+    name: "ליהיא שטויאר גלעד",
     jobTitle: "מפיקת פודקאסטים, מגישת חדשות לשעבר",
   },
 };
