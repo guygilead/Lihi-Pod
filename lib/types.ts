@@ -20,7 +20,7 @@ export type Step = {
 export type UseCase = {
   icon: IconName;
   title: string;
-  text: string;
+  text?: string;
 };
 
 export type Package = {
@@ -41,12 +41,13 @@ export type AssetSpoke = {
   tone?: "default" | "gold";
 };
 
-export type EmbedPlaceholder = {
-  platform: "spotify" | "instagram" | "youtube";
-  icon: IconName;
+export type Spotify = {
+  showId: string;
+  showUrl: string;
   title: string;
-  note: string;
-  exampleUrl?: string;
+  allEpisodesLabel: string;
+  /** Optional: feature specific episodes as separate players. */
+  episodeIds: string[];
 };
 
 export type SocialLink = {
