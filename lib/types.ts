@@ -17,16 +17,23 @@ export type Step = {
   text: string;
 };
 
+export type MiniStep = { title: string; text: string };
+
 export type UseCase = {
   icon: IconName;
   title: string;
   text?: string;
+  /** Example episode topic shown under the card. */
+  example?: string;
 };
 
 export type Package = {
   icon: IconName;
   name: string;
-  text: string;
+  tagline: string;
+  includes: string[];
+  ctaLabel: string;
+  ctaHref: string;
   highlight?: boolean;
 };
 
@@ -41,13 +48,34 @@ export type AssetSpoke = {
   tone?: "default" | "gold";
 };
 
-export type Spotify = {
-  showId: string;
-  showUrl: string;
+export type Episode = {
+  /** Spotify episode ID (open.spotify.com/episode/<id>). */
+  id: string;
   title: string;
-  allEpisodesLabel: string;
-  /** Optional: feature specific episodes as separate players. */
-  episodeIds: string[];
+  subtitle?: string;
+  guest?: string;
+  role?: string;
+  lang?: "he" | "en";
+  /** Short topical label for the card. */
+  topic?: string;
+  url: string;
+  badges?: string[];
+};
+
+export type PodcastShow = {
+  name: string;
+  spotifyShowId: string;
+  spotifyShowUrl: string;
+  tagline?: string;
+};
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  avatar?: string;
+  logo?: string;
 };
 
 export type SocialLink = {
