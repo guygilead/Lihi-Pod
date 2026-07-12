@@ -4,8 +4,11 @@ import { SoundWave } from "./SoundWave";
 import { Ltr } from "@/components/ui/Ltr";
 import { featuredEpisode, show } from "@/content/episodes";
 
-/** Premium hero composition. The now-playing card links to the real flagship
- *  episode on Spotify (no invented "episode 04"). */
+/**
+ * Hero media panel. Until a real SABONcast frame / production photo is
+ * supplied (TODO_REPLACE), a designed studio visual carries the mood; the
+ * player card links to the real flagship episode — no invented data.
+ */
 export function HeroVisual() {
   const ep = featuredEpisode;
 
@@ -16,7 +19,7 @@ export function HeroVisual() {
         <div className="absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-gold/25 blur-3xl" />
         <div className="absolute bottom-10 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-gold/10 blur-2xl" />
 
-        <div className="absolute start-5 top-5 inline-flex items-center gap-2 rounded-full bg-cream/10 px-3 py-1.5 text-xs font-medium text-cream ring-1 ring-cream/15 backdrop-blur-sm">
+        <div className="absolute start-5 top-5 inline-flex items-center gap-2 rounded-full bg-cream/10 px-3 py-1.5 text-sm font-medium text-cream ring-1 ring-cream/15 backdrop-blur-sm">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-soft opacity-70" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-soft" />
@@ -28,7 +31,7 @@ export function HeroVisual() {
           <div className="relative">
             <div className="absolute inset-0 -m-8 rounded-full bg-gold/15 blur-2xl" />
             <MicGlyph
-              className="relative w-24 text-gold-soft drop-shadow-[0_4px_20px_rgba(176,133,66,0.35)]"
+              className="relative w-24 text-gold-soft drop-shadow-[0_4px_20px_rgba(185,139,67,0.35)]"
               strokeWidth={1.8}
             />
           </div>
@@ -39,13 +42,13 @@ export function HeroVisual() {
         </div>
       </div>
 
-      {/* Now-playing card → real flagship episode */}
+      {/* Player card → the real flagship episode */}
       <a
         href={ep.url}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`להאזנה לפרק ${ep.title} ב־Spotify`}
-        className="group absolute -start-3 -bottom-7 w-[80%] max-w-[19rem] rounded-2xl bg-paper p-4 shadow-[var(--shadow-lift)] ring-1 ring-line transition-shadow hover:shadow-[0_4px_8px_rgba(28,27,25,0.08),0_24px_48px_rgba(28,27,25,0.14)] sm:-start-6"
+        className="group absolute -start-3 -bottom-7 w-[80%] max-w-[19rem] rounded-2xl bg-paper p-4 shadow-[var(--shadow-lift)] ring-1 ring-line transition-shadow hover:shadow-[0_4px_8px_rgba(29,27,24,0.08),0_24px_48px_rgba(29,27,24,0.14)] sm:-start-6"
       >
         <div className="flex items-center gap-3">
           <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold text-white">
@@ -55,7 +58,7 @@ export function HeroVisual() {
             <p className="truncate text-sm font-semibold text-ink" dir="ltr">
               {ep.title}
             </p>
-            <p className="truncate text-xs text-muted">
+            <p className="truncate text-sm text-muted">
               {show.name} · <Ltr>{ep.guest}</Ltr>
             </p>
           </div>
@@ -66,14 +69,14 @@ export function HeroVisual() {
         </div>
       </a>
 
-      {/* Floating asset chips — real repurposing outputs */}
-      <div className="absolute -end-2 top-10 hidden items-center gap-1.5 rounded-full bg-paper px-3 py-1.5 text-xs font-medium text-ink shadow-soft ring-1 ring-line sm:inline-flex lg:-end-5">
+      {/* Exactly two floating tags (§5) */}
+      <div className="absolute -end-2 top-10 hidden items-center gap-1.5 rounded-full bg-paper px-3 py-1.5 text-sm font-medium text-ink shadow-soft ring-1 ring-line sm:inline-flex lg:-end-5">
         <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-        Reels
+        פרק וידאו
       </div>
-      <div className="absolute -end-1 top-1/2 hidden items-center gap-1.5 rounded-full bg-paper px-3 py-1.5 text-xs font-medium text-ink shadow-soft ring-1 ring-line sm:inline-flex lg:-end-4">
+      <div className="absolute -end-1 top-1/2 hidden items-center gap-1.5 rounded-full bg-paper px-3 py-1.5 text-sm font-medium text-ink shadow-soft ring-1 ring-line sm:inline-flex lg:-end-4">
         <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-        כתבה לאתר
+        קטעים לרשתות
       </div>
     </div>
   );

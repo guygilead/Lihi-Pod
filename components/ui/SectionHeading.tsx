@@ -48,7 +48,7 @@ export function SectionHeading({
       )}
       <Heading
         className={cn(
-          "mt-4 text-3xl leading-tight text-balance md:text-4xl lg:text-[2.7rem]",
+          "mt-4 text-[2rem] leading-[1.12] text-balance md:text-[2.75rem] lg:text-[3.25rem]",
           isLight ? "text-cream" : "text-ink",
           titleClassName,
         )}
@@ -58,7 +58,8 @@ export function SectionHeading({
       {lead && (
         <p
           className={cn(
-            "mt-5 text-lg leading-relaxed text-pretty",
+            "mt-5 max-w-[650px] text-lg leading-relaxed text-pretty md:text-xl",
+            centered && "mx-auto",
             isLight ? "text-muted-light" : "text-muted",
           )}
         >
