@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { contact, socials } from "@/content/site";
 import { Container } from "@/components/ui/Container";
@@ -8,6 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Field } from "@/components/ui/Field";
 import { Icon } from "@/components/ui/Icon";
 import { Ltr } from "@/components/ui/Ltr";
+import { track } from "@/lib/analytics";
 import { SECTION } from "@/lib/nav";
 
 type Values = {
@@ -18,6 +19,8 @@ type Values = {
   email: string;
   interest: string;
   message: string;
+  /** Honeypot — must stay empty for real users. */
+  company_url: string;
 };
 
 const initial: Values = {
@@ -28,6 +31,7 @@ const initial: Values = {
   email: "",
   interest: "",
   message: "",
+  company_url: "",
 };
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -71,21 +75,35 @@ export function ContactForm() {
     {},
   );
   const [status, setStatus] = useState<Status>("idle");
+  const started = useRef(false);
 
   const update: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
   > = (e) => {
+    if (!started.current) {
+      started.current = true;
+      track("form_start");
+    }
     const { name, value } = e.target;
     setValues((v) => ({ ...v, [name]: value }));
   };
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    // Honeypot: a bot filled the hidden field — pretend success, send nothing.
+    if (values.company_url.trim()) {
+      setStatus("success");
+      setValues(initial);
+      return;
+    }
+
     const errs = validate(values);
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
 
     setStatus("submitting");
+    track("form_submit", { interest: values.interest || undefined });
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -95,6 +113,7 @@ export function ContactForm() {
       if (!res.ok) throw new Error("request failed");
       setStatus("success");
       setValues(initial);
+      started.current = false;
     } catch {
       setStatus("error");
     }
@@ -111,43 +130,56 @@ export function ContactForm() {
             <SectionHeading
               align="start"
               tone="light"
-              eyebrow={contact.eyebrow}
               title={contact.title}
               lead={contact.text}
             />
 
-            <ul className="mt-8 space-y-3">
-              {socials.map((s) => {
-                const external = s.href.startsWith("http");
-                return (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noopener noreferrer" : undefined}
-                      className="group flex items-center gap-4 rounded-2xl bg-charcoal-deep p-4 ring-1 ring-line-dark transition-colors hover:ring-gold/40"
-                    >
-                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-charcoal text-gold-soft ring-1 ring-line-dark">
-                        <Icon
-                          name={s.icon}
-                          className="h-5 w-5"
-                          strokeWidth={1.7}
-                          aria-hidden
-                        />
-                      </span>
-                      <span className="flex flex-col">
-                        <span className="text-sm text-muted-light">
-                          {s.label}
+            <p className="mt-6 flex items-center gap-2 text-base text-muted-light">
+              <span className="inline-block h-px w-6 bg-gold-soft/60" aria-hidden />
+              {contact.microcopy}
+            </p>
+
+            {socials.length > 0 && (
+              <ul className="mt-8 space-y-3">
+                {socials.map((s) => {
+                  const external = s.href.startsWith("http");
+                  const event =
+                    s.icon === "mail"
+                      ? "email_click"
+                      : s.label === "WhatsApp"
+                        ? "whatsapp_click"
+                        : "phone_click";
+                  return (
+                    <li key={s.label}>
+                      <a
+                        href={s.href}
+                        target={external ? "_blank" : undefined}
+                        rel={external ? "noopener noreferrer" : undefined}
+                        onClick={() => track(event)}
+                        className="group flex items-center gap-4 rounded-2xl bg-charcoal-deep p-4 ring-1 ring-line-dark transition-colors hover:ring-gold/40"
+                      >
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-charcoal text-gold-soft ring-1 ring-line-dark">
+                          <Icon
+                            name={s.icon}
+                            className="h-5 w-5"
+                            strokeWidth={1.7}
+                            aria-hidden
+                          />
                         </span>
-                        <span className="font-medium text-cream">
-                          <Ltr>{s.value}</Ltr>
+                        <span className="flex flex-col">
+                          <span className="text-sm text-muted-light">
+                            {s.label}
+                          </span>
+                          <span className="font-medium text-cream">
+                            <Ltr>{s.value}</Ltr>
+                          </span>
                         </span>
-                      </span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
 
           <div className="lg:col-span-7">
@@ -226,7 +258,7 @@ export function ContactForm() {
                   </Field>
                   <Field
                     as="textarea"
-                    label="הודעה חופשית"
+                    label="הודעה"
                     name="message"
                     value={values.message}
                     onChange={update}
@@ -235,6 +267,23 @@ export function ContactForm() {
                     dir="rtl"
                     rows={4}
                     className="sm:col-span-2"
+                  />
+                </div>
+
+                {/* Honeypot — hidden from users, catches naive bots */}
+                <div
+                  className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                  aria-hidden
+                >
+                  <label htmlFor="company_url">אל תמלאו שדה זה</label>
+                  <input
+                    id="company_url"
+                    name="company_url"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={values.company_url}
+                    onChange={update}
                   />
                 </div>
 
@@ -254,9 +303,7 @@ export function ContactForm() {
                 >
                   {status === "submitting" ? "שולח…" : contact.submitLabel}
                 </button>
-                <p className="mt-3 text-xs text-muted">
-                  פנייתכם תגיע ישירות לליהיא ולא תועבר לצד שלישי.
-                </p>
+                <p className="mt-3 text-xs text-muted">{contact.microcopy}</p>
               </form>
             )}
           </div>

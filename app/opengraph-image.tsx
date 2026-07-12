@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Lihi Shtoyer Gilad — Corporate Podcast Production";
+export const alt = "Lihi Shtoyer Gilead — Corporate Podcast Production";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -66,7 +66,7 @@ export default function Image() {
             lineHeight: 1.05,
           }}
         >
-          Lihi Shtoyer Gilad
+          Lihi Shtoyer Gilead
         </div>
         <div
           style={{

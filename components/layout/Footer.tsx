@@ -1,18 +1,19 @@
 import { navLinks } from "@/lib/nav";
-import { siteConfig, socials, ctaPrimary } from "@/content/site";
+import { siteConfig, socials } from "@/content/site";
 import { Icon } from "@/components/ui/Icon";
 import { Ltr } from "@/components/ui/Ltr";
 import { MicGlyph } from "@/components/visuals/MicGlyph";
 
+/** Minimal dark footer (§15) — real contact details only. */
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="bg-charcoal text-cream">
-      <div className="container-editorial py-16">
-        <div className="grid gap-10 md:grid-cols-12">
-          {/* brand */}
-          <div className="md:col-span-5">
+      <div className="container-editorial py-14">
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+          {/* Brand */}
+          <div className="max-w-sm">
             <div className="flex items-center gap-2.5">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-charcoal-deep text-gold-soft ring-1 ring-line-dark">
                 <MicGlyph className="w-4" strokeWidth={2.2} />
@@ -21,20 +22,19 @@ export function Footer() {
                 {siteConfig.name}
               </span>
             </div>
-            <p className="mt-4 max-w-sm leading-relaxed text-muted-light">
+            <p className="mt-4 text-base leading-relaxed text-muted-light">
               {siteConfig.about}
             </p>
           </div>
 
-          {/* nav */}
-          <nav className="md:col-span-3" aria-label="ניווט תחתון">
-            <h2 className="font-serif text-base font-bold text-cream">ניווט</h2>
-            <ul className="mt-4 space-y-2.5">
+          {/* Nav */}
+          <nav aria-label="ניווט תחתון">
+            <ul className="grid grid-cols-2 gap-x-10 gap-y-2.5">
               {navLinks.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    className="text-sm text-muted-light transition-colors hover:text-gold-soft"
+                    className="text-base text-muted-light transition-colors hover:text-gold-soft"
                   >
                     {l.label}
                   </a>
@@ -43,50 +43,39 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* contact */}
-          <div className="md:col-span-4">
-            <h2 className="font-serif text-base font-bold text-cream">
-              יצירת קשר
-            </h2>
-            <ul className="mt-4 space-y-3">
-              {socials.map((s) => {
-                const external = s.href.startsWith("http");
-                return (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      className="group inline-flex items-center gap-3 text-sm text-muted-light transition-colors hover:text-gold-soft"
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noopener noreferrer" : undefined}
-                    >
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-charcoal-deep text-gold-soft ring-1 ring-line-dark transition-colors group-hover:ring-gold/40">
-                        <Icon
-                          name={s.icon}
-                          className="h-4 w-4"
-                          strokeWidth={1.7}
-                          aria-hidden
-                        />
-                      </span>
-                      <Ltr>{s.value}</Ltr>
-                    </a>
-                  </li>
-                );
-              })}
+          {/* Real contact links only (hidden while contactDetails is empty) */}
+          {socials.length > 0 && (
+            <ul className="space-y-2.5">
+              {socials.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    className="group inline-flex items-center gap-3 text-base text-muted-light transition-colors hover:text-gold-soft"
+                    target={s.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      s.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                  >
+                    <Icon
+                      name={s.icon}
+                      className="h-4 w-4"
+                      strokeWidth={1.7}
+                      aria-hidden
+                    />
+                    <Ltr>{s.value}</Ltr>
+                  </a>
+                </li>
+              ))}
             </ul>
-            <a
-              href={ctaPrimary.href}
-              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold-soft hover:text-cream"
-            >
-              {ctaPrimary.label} ←
-            </a>
-          </div>
+          )}
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-line-dark pt-6 text-sm text-muted-light sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 border-t border-line-dark pt-6 text-base text-muted-light">
           <p>
             © <Ltr>{year}</Ltr> {siteConfig.name}. כל הזכויות שמורות.
           </p>
-          <p>{siteConfig.tagline}</p>
         </div>
       </div>
     </footer>

@@ -4,15 +4,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AssetHubSpoke } from "@/components/visuals/AssetHubSpoke";
 import { SECTION } from "@/lib/nav";
 
+/** One recording → a full content system (§9) — a single infographic. */
 export function OneEpisodeManyAssets() {
   return (
     <Section id={SECTION.assets} variant="sand">
-      <SectionHeading
-        eyebrow={assets.eyebrow}
-        title={assets.title}
-        lead={assets.text}
-      />
-      <div className="mt-16">
+      <SectionHeading title={assets.title} lead={assets.text} />
+      <div className="mt-14">
         <AssetHubSpoke />
       </div>
     </Section>

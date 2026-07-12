@@ -1,30 +1,30 @@
 @import "tailwindcss";
 
 /* ===== Design tokens (Tailwind v4 CSS-first) =====
-   Warm editorial palette: deep gold accent on charcoal + cream neutrals. */
+   Modern Editorial Broadcast — cream/black/gold, gold as accent only. */
 @theme {
-  --color-cream: #f7f3ec; /* page background (warm off-white) */
-  --color-paper: #ffffff; /* cards / elevated surfaces */
-  --color-sand: #efe8dc; /* alternate section bands */
-  --color-sand-deep: #e7ddcb; /* slightly deeper band */
-  --color-ink: #1c1b19; /* primary text (warm near-black) */
-  --color-charcoal: #26241f; /* dark "studio" panels */
-  --color-charcoal-deep: #1d1b17; /* deepest panel */
-  --color-muted: #6b655b; /* secondary text / captions */
-  --color-muted-light: #9a9183; /* on dark panels */
-  --color-line: #e2d9c9; /* hairline borders on cream */
-  --color-line-dark: #3a372f; /* borders on charcoal */
-  --color-gold: #b08542; /* primary accent (deep muted gold) */
-  --color-gold-deep: #8a6224; /* accent hover / pressed */
-  --color-gold-soft: #c79f5f; /* lighter gold for dark bg */
+  --color-cream: #f5f0e6; /* main page background */
+  --color-paper: #fbf8f2; /* light surfaces / alternate bands */
+  --color-sand: #ede4d2; /* deeper warm band */
+  --color-sand-deep: #e5dac4; /* rarely-used deepest band */
+  --color-ink: #1d1b18; /* primary text */
+  --color-charcoal: #191816; /* dark "studio" sections */
+  --color-charcoal-deep: #121110; /* deepest panel / gradients */
+  --color-muted: #766f65; /* secondary text */
+  --color-muted-light: #9a9183; /* secondary text on dark */
+  --color-line: rgba(29, 27, 24, 0.12); /* hairline borders */
+  --color-line-dark: #383530; /* borders on charcoal */
+  --color-gold: #b98b43; /* accent (highlights only) */
+  --color-gold-deep: #8f6a2f; /* accent hover / pressed */
+  --color-gold-soft: #d8b77c; /* gold for dark backgrounds */
   --color-copper: #a6633b; /* secondary warm accent */
-  --color-gold-tint: #f0e6d2; /* accent wash / chips / focus halo */
+  --color-gold-tint: #f1e7d1; /* accent wash / chips */
 
-  --radius-card: 1.25rem;
+  --radius-card: 1.5rem; /* 24px */
   --shadow-soft:
-    0 1px 2px rgba(28, 27, 25, 0.04), 0 8px 24px rgba(28, 27, 25, 0.06);
+    0 1px 2px rgba(29, 27, 24, 0.04), 0 8px 24px rgba(29, 27, 24, 0.06);
   --shadow-lift:
-    0 2px 4px rgba(28, 27, 25, 0.05), 0 18px 40px rgba(28, 27, 25, 0.1);
+    0 2px 4px rgba(29, 27, 24, 0.05), 0 18px 40px rgba(29, 27, 24, 0.1);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -48,7 +48,7 @@
     background-color: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    line-height: 1.65;
+    line-height: 1.7;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
@@ -59,7 +59,7 @@
   h4 {
     font-family: var(--font-serif);
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.12;
     letter-spacing: -0.01em;
   }
 
@@ -78,7 +78,7 @@
   /* Scroll-reveal primitive (IntersectionObserver toggles data-revealed) */
   [data-reveal] {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(18px);
     transition:
       opacity 0.7s var(--ease-out-soft),
       transform 0.7s var(--ease-out-soft);
@@ -102,6 +102,12 @@
       animation: none !important;
       transform: scaleY(0.7) !important;
     }
+    .play-pulse,
+    .float-slow,
+    .float-slower,
+    .dot-pulse {
+      animation: none !important;
+    }
   }
 }
 
@@ -109,13 +115,18 @@
   /* Centered editorial measure used by the Container component */
   .container-editorial {
     width: 100%;
-    max-width: 75rem; /* ~1200px */
+    max-width: 78rem; /* ~1248px */
     margin-inline: auto;
-    padding-inline: 1.5rem;
+    padding-inline: 1.25rem;
   }
   @media (min-width: 768px) {
     .container-editorial {
       padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container-editorial {
+      padding-inline: 3.5rem;
     }
   }
 }
@@ -129,4 +140,63 @@
   50% {
     transform: scaleY(1);
   }
+}
+
+/* Gentle pulse for the featured play button */
+@keyframes play-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(185, 139, 67, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(185, 139, 67, 0);
+  }
+}
+.play-pulse {
+  animation: play-pulse 2.6s var(--ease-out-soft) infinite;
+}
+
+/* Slow vertical float for decorative chips */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.float-slow {
+  animation: float-y 6s ease-in-out infinite;
+}
+.float-slower {
+  animation: float-y 7.5s ease-in-out infinite;
+  animation-delay: -2.5s;
+}
+
+/* Soft halo pulse for the "on air" dot (gentler than animate-ping) */
+@keyframes dot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(216, 183, 124, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(216, 183, 124, 0);
+  }
+}
+.dot-pulse {
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+/* Fine film grain for dark media panels (inline SVG noise, self-contained) */
+.texture-grain {
+  position: relative;
+}
+.texture-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

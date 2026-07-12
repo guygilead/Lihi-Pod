@@ -1,32 +1,26 @@
 import { Hero } from "@/components/sections/Hero";
-import { Credibility } from "@/components/sections/Credibility";
-import { WhatIsCorporatePodcast } from "@/components/sections/WhatIsCorporatePodcast";
-import { BenefitsExternal } from "@/components/sections/BenefitsExternal";
-import { BenefitsInternal } from "@/components/sections/BenefitsInternal";
-import { Process } from "@/components/sections/Process";
-import { Deliverables } from "@/components/sections/Deliverables";
-import { OneEpisodeManyAssets } from "@/components/sections/OneEpisodeManyAssets";
+import { TrustStrip } from "@/components/sections/TrustStrip";
 import { UseCases } from "@/components/sections/UseCases";
-import { Portfolio } from "@/components/sections/Portfolio";
-import { BeforeAfter } from "@/components/sections/BeforeAfter";
+import { FeaturedCaseStudy } from "@/components/sections/FeaturedCaseStudy";
+import { OneEpisodeManyAssets } from "@/components/sections/OneEpisodeManyAssets";
+import { Credibility } from "@/components/sections/Credibility";
+import { Process } from "@/components/sections/Process";
 import { Packages } from "@/components/sections/Packages";
 import { Faq } from "@/components/sections/Faq";
 import { ContactForm } from "@/components/sections/ContactForm";
 
+/* Home structure (§2): Hero → trust strip → three uses → SABONcast case
+   study → content system → why Lihi → process → packages → FAQ → CTA+form. */
 export default function Home() {
   return (
     <>
       <Hero />
-      <Credibility />
-      <WhatIsCorporatePodcast />
-      <BenefitsExternal />
-      <BenefitsInternal />
-      <Process />
-      <Deliverables />
-      <OneEpisodeManyAssets />
+      <TrustStrip />
       <UseCases />
-      <Portfolio />
-      <BeforeAfter />
+      <FeaturedCaseStudy />
+      <OneEpisodeManyAssets />
+      <Credibility />
+      <Process />
       <Packages />
       <Faq />
       <ContactForm />
