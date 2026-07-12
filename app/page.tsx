@@ -1,14 +1,13 @@
 import { Hero } from "@/components/sections/Hero";
-import { Credibility } from "@/components/sections/Credibility";
 import { WhatIsCorporatePodcast } from "@/components/sections/WhatIsCorporatePodcast";
-import { Benefits } from "@/components/sections/Benefits";
-import { Process } from "@/components/sections/Process";
-import { Deliverables } from "@/components/sections/Deliverables";
-import { OneEpisodeManyAssets } from "@/components/sections/OneEpisodeManyAssets";
 import { UseCases } from "@/components/sections/UseCases";
-import { Portfolio } from "@/components/sections/Portfolio";
-import { BeforeAfter } from "@/components/sections/BeforeAfter";
+import { FeaturedCaseStudy } from "@/components/sections/FeaturedCaseStudy";
+import { OneEpisodeManyAssets } from "@/components/sections/OneEpisodeManyAssets";
+import { Credibility } from "@/components/sections/Credibility";
+import { Process } from "@/components/sections/Process";
+import { WorkGallery } from "@/components/sections/WorkGallery";
 import { Packages } from "@/components/sections/Packages";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Faq } from "@/components/sections/Faq";
 import { ContactForm } from "@/components/sections/ContactForm";
 
@@ -16,16 +15,15 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Credibility />
       <WhatIsCorporatePodcast />
-      <Benefits />
-      <Process />
-      <Deliverables />
-      <OneEpisodeManyAssets />
       <UseCases />
-      <Portfolio />
-      <BeforeAfter />
+      <FeaturedCaseStudy />
+      <OneEpisodeManyAssets />
+      <Credibility />
+      <Process />
+      <WorkGallery />
       <Packages />
+      <Testimonials />
       <Faq />
       <ContactForm />
     </>

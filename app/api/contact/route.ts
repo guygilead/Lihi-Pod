@@ -10,6 +10,8 @@ const schema = z.object({
   email: z.email(),
   interest: z.string().trim().max(80).optional().default(""),
   message: z.string().trim().max(4000).optional().default(""),
+  // Honeypot — real users leave this empty.
+  company_url: z.string().max(200).optional().default(""),
 });
 
 export async function POST(req: Request) {
@@ -28,6 +30,11 @@ export async function POST(req: Request) {
     );
   }
   const v = parsed.data;
+
+  // Honeypot tripped: accept silently so the bot sees success, send nothing.
+  if (v.company_url.trim()) {
+    return NextResponse.json({ ok: true, delivered: false });
+  }
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO;
