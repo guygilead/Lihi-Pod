@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { faqs } from "@/content/faqs";
 import { show, episodes } from "@/content/episodes";
+import { contactDetails } from "@/content/site";
 
 export const metadata = siteMetadata;
 
@@ -26,6 +27,8 @@ const jsonLd = {
       url: SITE_URL,
       areaServed: "IL",
       serviceType: "הפקת פודקאסטים ארגוניים",
+      ...(contactDetails.email ? { email: contactDetails.email } : {}),
+      ...(contactDetails.phone ? { telephone: contactDetails.phone } : {}),
       founder: { "@id": `${SITE_URL}/#lihi` },
       provider: { "@id": `${SITE_URL}/#lihi` },
     },

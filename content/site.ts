@@ -15,18 +15,24 @@ export const siteConfig = {
 };
 
 /**
- * TODO_REPLACE — single source of truth for contact details.
- * Leave a field empty and it will NOT be shown on the live site (no dummy
- * data). Fill real values before launch. The contact form still works and
- * delivers to Lihi regardless (see app/api/contact/route.ts).
+ * Single source of truth for contact details. A field left empty is NOT
+ * shown on the live site (no dummy data). The contact form delivers to Lihi
+ * regardless (see app/api/contact/route.ts).
+ * TODO_REPLACE: whatsapp / linkedin / instagram once provided.
  */
 export const contactDetails = {
-  phone: "",
-  email: "",
+  phone: "054-2070096",
+  email: "lihi@gilead.co.il",
   whatsapp: "",
   linkedin: "",
   instagram: "",
 };
+
+/** "054-…" → E.164 (+97254…) so tel:/wa.me links work internationally too. */
+function e164(num: string): string {
+  const digits = num.replace(/[^\d]/g, "");
+  return digits.startsWith("0") ? `+972${digits.slice(1)}` : `+${digits}`;
+}
 
 function buildSocials(): SocialLink[] {
   const c = contactDetails;
@@ -36,14 +42,14 @@ function buildSocials(): SocialLink[] {
       icon: "phone",
       label: "טלפון",
       value: c.phone,
-      href: `tel:${c.phone.replace(/[^\d+]/g, "")}`,
+      href: `tel:${e164(c.phone)}`,
     });
   if (c.whatsapp)
     list.push({
       icon: "phone",
       label: "WhatsApp",
       value: c.whatsapp,
-      href: `https://wa.me/${c.whatsapp.replace(/[^\d]/g, "")}`,
+      href: `https://wa.me/${e164(c.whatsapp).slice(1)}`,
     });
   if (c.email)
     list.push({
