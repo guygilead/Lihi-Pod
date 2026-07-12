@@ -4,7 +4,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { ViewTracker } from "@/components/ui/ViewTracker";
 import { FeaturedEpisode } from "@/components/visuals/FeaturedEpisode";
-import { show, featuredEpisode } from "@/content/episodes";
+import { EpisodeMini } from "@/components/visuals/EpisodeMini";
+import { show, featuredEpisode, secondaryEpisode } from "@/content/episodes";
 import { caseStudy, ctaPrimary } from "@/content/site";
 import { SECTION } from "@/lib/nav";
 
@@ -17,6 +18,12 @@ export function FeaturedCaseStudy() {
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
         <Reveal className="order-2 lg:order-1">
           <FeaturedEpisode episode={featuredEpisode} />
+          <div className="mt-4">
+            <p className="mb-2.5 text-sm font-semibold text-muted-light">
+              עוד מתוך הסדרה
+            </p>
+            <EpisodeMini episode={secondaryEpisode} />
+          </div>
         </Reveal>
 
         <div className="order-1 lg:order-2">

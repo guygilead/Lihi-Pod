@@ -23,7 +23,7 @@ export const siteConfig = {
 export const contactDetails = {
   phone: "054-2070096",
   email: "lihi@gilead.co.il",
-  whatsapp: "",
+  whatsapp: "054-2070096",
   linkedin: "",
   instagram: "",
 };
@@ -46,9 +46,9 @@ function buildSocials(): SocialLink[] {
     });
   if (c.whatsapp)
     list.push({
-      icon: "phone",
+      icon: "whatsapp",
       label: "WhatsApp",
-      value: c.whatsapp,
+      value: "לשליחת הודעה",
       href: `https://wa.me/${e164(c.whatsapp).slice(1)}`,
     });
   if (c.email)

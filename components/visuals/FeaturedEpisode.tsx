@@ -3,14 +3,16 @@
 import { useState } from "react";
 import { Play, ArrowUpRight } from "lucide-react";
 import { Ltr } from "@/components/ui/Ltr";
+import { StudioMic } from "./StudioMic";
+import { SoundWave } from "./SoundWave";
 import { track } from "@/lib/analytics";
 import type { Episode } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 /**
- * Media showcase for a flagship episode (§5.4). Shows a designed 16:9 poster
- * with real episode metadata; the Spotify player is lazy-loaded only on click
- * (no autoplay). "לצפייה ב־Spotify" is the fallback / deep link.
+ * Media showcase for a flagship episode (§8). Designed 16:9 poster with real
+ * episode metadata; the Spotify player is lazy-loaded only on click (no
+ * autoplay). "לצפייה ב־Spotify" is the fallback / deep link.
  */
 export function FeaturedEpisode({
   episode,
@@ -47,12 +49,35 @@ export function FeaturedEpisode({
               track("featured_episode_play", { episode: episode.id });
             }}
             aria-label={`נגן/י את הפרק ${episode.title}`}
-            className="group absolute inset-0 flex flex-col justify-between bg-gradient-to-br from-charcoal to-charcoal-deep p-6 text-start md:p-8"
+            className="texture-grain group absolute inset-0 flex flex-col justify-between bg-gradient-to-br from-charcoal to-charcoal-deep p-6 text-start md:p-8"
           >
+            {/* glow + sound arcs + mic silhouette */}
             <div
               aria-hidden
-              className="pointer-events-none absolute -top-16 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-gold/20 blur-3xl"
+              className="pointer-events-none absolute -top-20 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-gold/18 blur-3xl"
             />
+            <svg
+              viewBox="0 0 640 360"
+              className="pointer-events-none absolute inset-0 h-full w-full text-gold"
+              aria-hidden
+            >
+              <circle cx="320" cy="180" r="70" stroke="currentColor" strokeOpacity="0.13" fill="none" />
+              <circle cx="320" cy="180" r="110" stroke="currentColor" strokeOpacity="0.08" fill="none" />
+              <circle
+                cx="320"
+                cy="180"
+                r="150"
+                stroke="currentColor"
+                strokeOpacity="0.05"
+                strokeDasharray="3 7"
+                fill="none"
+              />
+            </svg>
+            <StudioMic
+              className="pointer-events-none absolute -bottom-7 -start-4 h-44 text-gold-soft/15"
+              strokeWidth={1.3}
+            />
+
             <div className="relative flex flex-wrap gap-2">
               {episode.badges?.map((b) => (
                 <span
@@ -65,7 +90,7 @@ export function FeaturedEpisode({
             </div>
 
             <div className="relative flex flex-1 items-center justify-center">
-              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-gold text-white shadow-[var(--shadow-lift)] transition-transform duration-300 group-hover:scale-105">
+              <span className="play-pulse flex h-16 w-16 items-center justify-center rounded-full bg-gold text-white shadow-[var(--shadow-lift)] transition-transform duration-300 group-hover:scale-105">
                 <Play className="h-7 w-7 translate-x-px fill-current" aria-hidden />
               </span>
             </div>
@@ -91,6 +116,11 @@ export function FeaturedEpisode({
                   {episode.role ? ` · ${episode.role}` : ""}
                 </p>
               )}
+              <SoundWave
+                bars={26}
+                animated={false}
+                className="mt-3 h-3 justify-start text-gold-soft/30"
+              />
             </div>
           </button>
         )}

@@ -102,7 +102,10 @@
       animation: none !important;
       transform: scaleY(0.7) !important;
     }
-    .play-pulse {
+    .play-pulse,
+    .float-slow,
+    .float-slower,
+    .dot-pulse {
       animation: none !important;
     }
   }
@@ -151,4 +154,49 @@
 }
 .play-pulse {
   animation: play-pulse 2.6s var(--ease-out-soft) infinite;
+}
+
+/* Slow vertical float for decorative chips */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.float-slow {
+  animation: float-y 6s ease-in-out infinite;
+}
+.float-slower {
+  animation: float-y 7.5s ease-in-out infinite;
+  animation-delay: -2.5s;
+}
+
+/* Soft halo pulse for the "on air" dot (gentler than animate-ping) */
+@keyframes dot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(216, 183, 124, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(216, 183, 124, 0);
+  }
+}
+.dot-pulse {
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+/* Fine film grain for dark media panels (inline SVG noise, self-contained) */
+.texture-grain {
+  position: relative;
+}
+.texture-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

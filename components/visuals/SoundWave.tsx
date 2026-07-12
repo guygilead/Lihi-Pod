@@ -1,7 +1,9 @@
 import { cn } from "@/lib/utils";
 
+/* Center-weighted, mirrored pattern — reads as one elegant waveform. */
 const PATTERN = [
-  42, 70, 100, 58, 84, 46, 92, 54, 76, 38, 66, 96, 50, 80, 60, 88,
+  22, 34, 52, 40, 66, 48, 82, 60, 96, 72, 100, 72, 96, 60, 82, 48, 66, 40, 52,
+  34, 22,
 ];
 
 /** Equalizer-style soundwave built from animated bars (decorative). */
@@ -19,7 +21,7 @@ export function SoundWave({
   return (
     <div
       className={cn(
-        "motion-safe-wave flex items-center justify-center gap-[3px]",
+        "motion-safe-wave flex items-center justify-center gap-1",
         className,
       )}
       aria-hidden
@@ -31,11 +33,11 @@ export function SoundWave({
             key={i}
             style={{
               height: `${h}%`,
-              animationDelay: `${(i % PATTERN.length) * 85}ms`,
+              animationDelay: `${(i % PATTERN.length) * 120}ms`,
             }}
             className={cn(
-              "w-[3px] origin-center rounded-full bg-current",
-              animated && "animate-[wave-pulse_1.3s_ease-in-out_infinite]",
+              "w-[2.5px] origin-center rounded-full bg-current",
+              animated && "animate-[wave-pulse_2.4s_ease-in-out_infinite]",
               barClassName,
             )}
           />
