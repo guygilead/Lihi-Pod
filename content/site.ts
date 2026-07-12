@@ -1,11 +1,4 @@
-import type {
-  AssetSpoke,
-  Cta,
-  FlowNode,
-  IconCard,
-  SocialLink,
-  UseCase,
-} from "@/lib/types";
+import type { AssetSpoke, Cta, SocialLink, UseCase } from "@/lib/types";
 import { SECTION } from "@/lib/nav";
 
 /* ============================================================
@@ -18,8 +11,7 @@ export const siteConfig = {
   name: "ליהיא שטויאר גלעד",
   firstName: "ליהיא",
   tagline: "הפקת פודקאסטים לחברות וארגונים",
-  about:
-    "אסטרטגיה, תוכן, ראיונות והפקת פודקאסט אודיו ווידאו לחברות וארגונים — מהרעיון ועד לפרקים ולנכסי התוכן שממשיכים לעבוד אחריהם.",
+  about: "אסטרטגיה, תוכן והפקת פודקאסטים לחברות וארגונים.",
 };
 
 /**
@@ -87,7 +79,7 @@ export const ctaPrimary: Cta = {
 
 export const ctaSecondary: Cta = {
   label: "לצפייה בפרק לדוגמה",
-  href: `#${SECTION.caseStudy}`,
+  href: `#${SECTION.work}`,
 };
 
 export const hero = {
@@ -96,109 +88,92 @@ export const hero = {
   subtitle:
     "אסטרטגיה, תוכן, ראיונות והפקת אודיו ווידאו לחברות וארגונים. מהרעיון הראשון ועד לפרק, הסרטונים והתוכן שממשיכים לעבוד אחריו.",
   microcopy: "שיחת אפיון של 20 דקות · ללא התחייבות",
-  trust: [
-    "אסטרטגיה ותוכן",
-    "אודיו + וידאו",
-    "הכנת מרואיינים",
-    "עריכה ונכסי תוכן",
-    "עברית + אנגלית",
-  ],
 };
 
-/* Intro — "why a corporate podcast" (§6.3). */
-export const whatIs = {
-  eyebrow: "למה פודקאסט ארגוני",
-  title: "לא עוד ערוץ תוכן. קול ברור לארגון.",
-  text: "פודקאסט ארגוני מאפשר לחברה להציג את הידע, האנשים והעשייה שלה בצורה עמוקה, אנושית ואמינה — לבנות מומחיות כלפי חוץ, לחזק את מותג המעסיק ולחבר בין אנשים ומחלקות בתוך הארגון.",
-  flowInputs: [
-    { icon: "quote", label: "סיפור החברה" },
-    { icon: "goals", label: "אסטרטגיה ומטרות" },
-    { icon: "mic", label: "פרקי פודקאסט" },
-  ] satisfies FlowNode[],
-  flowOutputs: [
-    { icon: "video", label: "קטעי וידאו" },
-    { icon: "social", label: "תוכן לרשתות" },
-    { icon: "document", label: "תוכן לאתר" },
-    { icon: "internal", label: "תקשורת פנים" },
-    { icon: "employer", label: "מותג מעסיק" },
-    { icon: "sparkle", label: "נכס שיווקי" },
-  ] satisfies FlowNode[],
-};
+/** Trust strip — five capabilities, gold-dot separated. */
+export const trustItems = [
+  "אסטרטגיה ותוכן",
+  "הכנת מרואיינים",
+  "אודיו + וידאו",
+  "עריכה מלאה",
+  "עברית + אנגלית",
+];
 
-/* Exactly three use cases (§6.3). */
+/* Three core uses (§7) — numbered editorial cards. */
 export const useCases = {
-  eyebrow: "למי זה מתאים",
-  title: "שלושה שימושים, קול אחד",
-  lead: "אותו פודקאסט יכול לשרת כמה מטרות — נבחר יחד את הזווית שהכי חשובה לכם.",
-  ctaLabel: "לראות דוגמה",
-  ctaHref: `#${SECTION.caseStudy}`,
+  title: "לא עוד ערוץ תוכן. קול ברור לארגון.",
+  lead: "פודקאסט ארגוני מאפשר לחברה להפוך ידע, אנשים וסיפורים לתוכן עמוק, אנושי ואמין.",
   cards: [
     {
-      icon: "expertise",
+      num: "01",
       title: "שיווק ומומחיות",
-      text: "הפיכת ידע מקצועי, מנהלים ומומחים לתוכן שבונה אמון ובידול.",
-      example: "פרק לדוגמה: תובנות ומגמות מהתחום מפי מומחה/ית מהחברה.",
+      text: "להפוך מנהלים, מומחים וידע מקצועי לתוכן שבונה אמון, בידול וסמכות.",
+      example: "שיחות עם מומחים, לקוחות ומובילי תחום.",
     },
     {
-      icon: "employer",
+      num: "02",
       title: "מותג מעסיק",
-      text: "הצגת האנשים, התרבות והעשייה באופן שמחבר עובדים ומועמדים.",
-      example: "פרק לדוגמה: שיחה עם מנהל/ת על התרבות ועל הצוות.",
+      text: "להציג את האנשים, התרבות והעשייה של החברה באופן שמחבר עובדים ומועמדים.",
+      example: "סיפורי קריירה, צוותים ופרויקטים.",
     },
     {
-      icon: "internal",
+      num: "03",
       title: "תקשורת פנים",
-      text: "הנגשת הנהלה, פרויקטים, ידע וסיפורים בתוך הארגון.",
-      example: "פרק לדוגמה: הצגת פרויקט חוצה-מחלקות והאנשים מאחוריו.",
+      text: "להנגיש הנהלה, ידע, שינוי ארגוני והצלחות בצורה שקל לצרוך ולשתף.",
+      example: "פרקי הנהלה, חדשנות ותוכן פנים־ארגוני.",
     },
   ] satisfies UseCase[],
 };
 
-/* One recording → a full content system (§6.5). */
+/* SABONcast case study copy (§8). */
+export const caseStudy = {
+  eyebrow: "עבודה לדוגמה",
+  title: "כך הופכים את האנשים שמאחורי המותג לסדרת תוכן",
+  text: "SABONcast נבנה כדי להביא לקדמת הבמה את האנשים, הידע והסיפורים שמאחורי מותג גלובלי. כל פרק חיבר בין סיפור אישי, תובנות מקצועיות והתרבות הארגונית של החברה.",
+  outputs: ["פרק מלא", "קטעי וידאו", "תוכן לרשתות", "תוכן פנים־ארגוני"],
+  ctaLabel: "כך יכול להיראות הפודקאסט של החברה שלכם",
+};
+
+/* One recording → a full content system (§9). */
 export const assets = {
-  eyebrow: "החזר על ההשקעה",
   title: "הקלטה אחת. מערכת תוכן שלמה.",
-  text: "בהתאם למסלול ולחומר המצולם, כל פרק יכול להפוך לפרק וידאו ואודיו, קטעים קצרים, פוסטים, כתבה, ניוזלטר ותוכן לשיווק, לגיוס ולתקשורת פנים.",
+  text: "בהתאם למסלול ולחומר המצולם, כל פרק יכול להפוך למגוון נכסי תוכן לשיווק, גיוס ותקשורת פנים.",
   hubLabel: "פרק אחד",
   spokes: [
-    { icon: "video", label: "פרק וידאו מלא", tone: "gold" },
+    { icon: "video", label: "פרק וידאו", tone: "gold" },
     { icon: "audio", label: "פרק אודיו", tone: "gold" },
-    { icon: "social", label: "4–10 קטעים קצרים" },
-    { icon: "linkedin", label: "פוסטים ל־LinkedIn" },
     { icon: "instagram", label: "Reels" },
     { icon: "youtube", label: "Shorts" },
-    { icon: "document", label: "כתבה לאתר" },
-    { icon: "internal", label: "ניוזלטר" },
+    { icon: "social", label: "פוסטים" },
+    { icon: "document", label: "כתבה" },
+    { icon: "mail", label: "ניוזלטר" },
     { icon: "quote", label: "ציטוטים" },
-    { icon: "employer", label: "תוכן פנים־ארגוני" },
   ] satisfies AssetSpoke[],
 };
 
-/* Why Lihi — commercial differentiation (§6.6). */
+/* Why Lihi (§10) — open editorial, no cards. */
 export const credibility = {
-  eyebrow: "למה ליהיא",
   title: "לא רק להקליט שיחה. לדעת להוציא ממנה סיפור.",
   lead: "ליהיא שטויאר גלעד, מגישת חדשות לשעבר בערוץ 1 ובכאן 11, משלבת ניסיון בראיונות, כתיבה, מיתוג ותקשורת עם ניהול הפקה מלא. היא בונה את השיחה, מכינה את המשתתפים, מחדדת את המסרים ומובילה את הראיון כך שהתוצאה נשמעת טבעית, מקצועית ומדויקת.",
   portraitCaption: "ליהיא שטויאר גלעד",
   points: [
-    { icon: "prep", title: "הכנת מנהלים ומרואיינים" },
-    { icon: "writing", title: "בניית שאלות שמייצרות תשובות טובות" },
-    { icon: "branding", title: "זיהוי מסרים וסיפורים" },
-    { icon: "guidance", title: "ניהול השיחה וההפקה מקצה לקצה" },
-  ] satisfies IconCard[],
+    "הכנת מנהלים ומרואיינים",
+    "בניית שאלות שמייצרות תשובות טובות",
+    "זיהוי מסרים וסיפורים",
+    "הובלת ההפקה מקצה לקצה",
+  ],
 };
 
-/* Final CTA + contact form copy (§6.12 / §7). */
+/* Final CTA + contact form copy (§14). */
 export const contact = {
-  eyebrow: "צרו קשר",
   title: "יש לחברה שלכם ידע, אנשים וסיפורים. בואו נהפוך אותם לערוץ תוכן.",
   text: "בשיחת אפיון קצרה נבין את המטרה, הקהל והמסרים, ונבחן איזה פורמט יכול לעבוד עבור החברה שלכם.",
-  submitLabel: "לתיאום שיחת אפיון",
-  microcopy: "ללא התחייבות · השיחה מגיעה ישירות לליהיא",
+  submitLabel: "לתיאום שיחת אפיון של 20 דקות",
+  microcopy: "ללא התחייבות · הפנייה מגיעה ישירות לליהיא",
   successTitle: "תודה!",
   successText: "הפנייה נשלחה בהצלחה. נחזור אליכם בהקדם לתיאום שיחת אפיון.",
   errorText: "אירעה תקלה בשליחה. אפשר לנסות שוב או לפנות שוב מאוחר יותר.",
-  interestLabel: "מה המטרה המרכזית?",
+  interestLabel: "מה המטרה?",
   interestPlaceholder: "בחרו מטרה",
   interestOptions: [
     "שיווק ומומחיות",

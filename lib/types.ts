@@ -4,33 +4,23 @@ export type NavLink = { label: string; href: string };
 
 export type Cta = { label: string; href: string };
 
-export type IconCard = {
-  icon: IconName;
-  title: string;
-  text?: string;
-};
-
 export type Step = {
   num: string;
-  icon: IconName;
   title: string;
   text: string;
 };
 
-export type MiniStep = { title: string; text: string };
-
 export type UseCase = {
-  icon: IconName;
+  num: string;
   title: string;
-  text?: string;
-  /** Example episode topic shown under the card. */
-  example?: string;
+  text: string;
+  example: string;
 };
 
 export type Package = {
   icon: IconName;
   name: string;
-  tagline: string;
+  fitFor: string;
   includes: string[];
   ctaLabel: string;
   ctaHref: string;
@@ -38,8 +28,6 @@ export type Package = {
 };
 
 export type FaqItem = { q: string; a: string };
-
-export type FlowNode = { icon: IconName; label: string };
 
 export type AssetSpoke = {
   icon: IconName;

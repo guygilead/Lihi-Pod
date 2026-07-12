@@ -1,9 +1,8 @@
 import type { Episode, PodcastShow } from "@/lib/types";
 
 /**
- * SABONcast — the real podcast produced by Lihi, used across the site as the
- * flagship proof / case study. Episode IDs are the codes from
- * open.spotify.com/episode/<id>.
+ * SABONcast — the real podcast produced by Lihi, presented as the flagship
+ * case study. Episode IDs are the codes from open.spotify.com/episode/<id>.
  */
 export const show: PodcastShow = {
   name: "SABONcast",
@@ -21,7 +20,7 @@ export const featuredEpisode: Episode = {
   lang: "en",
   topic: "HR · הנהלה גלובלית · אמון ושינוי ארגוני",
   url: "https://open.spotify.com/episode/2pNThWdobSYZKhjxtKZuYJ",
-  badges: ["פרק וידאו", "SABONcast"],
+  badges: ["SABONcast", "Video Episode"],
 };
 
 export const secondaryEpisode: Episode = {
@@ -36,17 +35,5 @@ export const secondaryEpisode: Episode = {
   badges: ["SABONcast"],
 };
 
-/** Ordered list for galleries. */
+/** Ordered list (feeds the PodcastEpisode JSON-LD). */
 export const episodes: Episode[] = [featuredEpisode, secondaryEpisode];
-
-/** Content assets a single episode can become (case-study "outputs" row). */
-export const episodeOutputs: string[] = [
-  "פרק וידאו מלא",
-  "פרק אודיו",
-  "קטעים קצרים לרשתות",
-  "פוסטים ללינקדאין",
-  "כתבה לאתר",
-  "ניוזלטר",
-  "ציטוטים",
-  "תוכן פנים־ארגוני",
-];
