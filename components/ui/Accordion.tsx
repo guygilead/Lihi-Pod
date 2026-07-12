@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { track } from "@/lib/analytics";
 import type { FaqItem } from "@/lib/types";
 
 function AccordionItem({ item }: { item: FaqItem }) {
@@ -17,7 +18,12 @@ function AccordionItem({ item }: { item: FaqItem }) {
           id={`${id}-btn`}
           aria-expanded={open}
           aria-controls={`${id}-panel`}
-          onClick={() => setOpen((o) => !o)}
+          onClick={() =>
+            setOpen((o) => {
+              if (!o) track("faq_open", { q: item.q });
+              return !o;
+            })
+          }
           className="flex w-full items-center justify-between gap-4 py-5 text-start"
         >
           <span className="font-serif text-lg font-bold text-ink md:text-xl">

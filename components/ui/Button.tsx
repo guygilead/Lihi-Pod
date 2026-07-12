@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { track, type AnalyticsEvent } from "@/lib/analytics";
 
 type Variant =
   | "primary"
@@ -38,6 +41,9 @@ type Props = {
   ariaLabel?: string;
   target?: string;
   rel?: string;
+  /** Fire a (dependency-free) analytics event on click. */
+  analyticsEvent?: AnalyticsEvent;
+  analyticsParams?: Record<string, string | number | boolean | undefined>;
 };
 
 export function Button({
@@ -52,15 +58,22 @@ export function Button({
   ariaLabel,
   target,
   rel,
+  analyticsEvent,
+  analyticsParams,
 }: Props) {
   const cls = cn(base, sizes[size], variants[variant], className);
+
+  const handleClick: React.MouseEventHandler = (e) => {
+    if (analyticsEvent) track(analyticsEvent, analyticsParams);
+    onClick?.(e);
+  };
 
   if (href) {
     return (
       <a
         href={href}
         className={cls}
-        onClick={onClick}
+        onClick={handleClick}
         aria-label={ariaLabel}
         target={target}
         rel={rel}
@@ -75,7 +88,7 @@ export function Button({
       type={type}
       className={cls}
       disabled={disabled}
-      onClick={onClick}
+      onClick={handleClick}
       aria-label={ariaLabel}
     >
       {children}
