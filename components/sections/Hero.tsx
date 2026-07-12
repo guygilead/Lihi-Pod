@@ -38,6 +38,7 @@ export function Hero() {
                 variant="primary"
                 size="lg"
                 className="w-full sm:w-auto"
+                analyticsEvent="hero_cta_click"
               >
                 {ctaPrimary.label}
               </Button>
@@ -52,9 +53,9 @@ export function Hero() {
               </Button>
             </div>
 
-            <p className="mt-7 flex items-center justify-center gap-2 text-sm text-muted lg:justify-start">
+            <p className="mt-5 flex items-center justify-center gap-2 text-sm text-muted lg:justify-start">
               <span className="inline-block h-px w-6 bg-gold/50" aria-hidden />
-              {hero.trust}
+              {hero.microcopy}
             </p>
           </div>
 
@@ -63,13 +64,14 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="mt-20 grid grid-cols-1 gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-3">
-          {hero.stats.map((s) => (
-            <div key={s.label} className="bg-paper px-6 py-7 text-center">
-              <p className="font-serif text-xl font-bold text-gold-deep">
-                {s.value}
-              </p>
-              <p className="mt-1 text-sm text-muted">{s.label}</p>
+        {/* Trust strip — five capabilities */}
+        <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-3 lg:grid-cols-5">
+          {hero.trust.map((t) => (
+            <div
+              key={t}
+              className="flex items-center justify-center bg-paper px-4 py-5 text-center"
+            >
+              <p className="text-sm font-semibold text-ink">{t}</p>
             </div>
           ))}
         </div>
