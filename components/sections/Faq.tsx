@@ -1,4 +1,5 @@
-import { faq, ctaPrimary } from "@/content/site";
+import { ctaPrimary } from "@/content/site";
+import { faqs, faqIntro } from "@/content/faqs";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Accordion } from "@/components/ui/Accordion";
@@ -12,19 +13,24 @@ export function Faq() {
         <div className="lg:col-span-4">
           <SectionHeading
             align="start"
-            eyebrow={faq.eyebrow}
-            title={faq.title}
+            eyebrow={faqIntro.eyebrow}
+            title={faqIntro.title}
           />
           <p className="mt-5 leading-relaxed text-muted">
-            לא מצאתם תשובה? נשמח לענות על כל שאלה בשיחת היכרות קצרה.
+            לא מצאתם תשובה? נשמח לענות על כל שאלה בשיחת אפיון קצרה.
           </p>
-          <Button href={ctaPrimary.href} variant="secondary" className="mt-6">
+          <Button
+            href={ctaPrimary.href}
+            variant="secondary"
+            className="mt-6"
+            analyticsEvent="hero_cta_click"
+          >
             {ctaPrimary.label}
           </Button>
         </div>
 
         <div className="lg:col-span-8">
-          <Accordion items={faq.items} />
+          <Accordion items={faqs} />
         </div>
       </div>
     </Section>

@@ -120,30 +120,36 @@ export function MobileMenu({
           >
             {ctaPrimary.label}
           </Button>
-          <div className="mt-4 flex items-center gap-3">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-paper text-ink ring-1 ring-line transition-colors hover:text-gold-deep"
-                aria-label={s.label}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  s.href.startsWith("http") ? "noopener noreferrer" : undefined
-                }
-              >
-                <Icon
-                  name={s.icon}
-                  className="h-5 w-5"
-                  strokeWidth={1.7}
-                  aria-hidden
-                />
-              </a>
-            ))}
-          </div>
-          <p className="mt-3 text-xs text-muted">
-            <Ltr>{socials[0].value}</Ltr>
-          </p>
+          {socials.length > 0 && (
+            <>
+              <div className="mt-4 flex items-center gap-3">
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-paper text-ink ring-1 ring-line transition-colors hover:text-gold-deep"
+                    aria-label={s.label}
+                    target={s.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      s.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                  >
+                    <Icon
+                      name={s.icon}
+                      className="h-5 w-5"
+                      strokeWidth={1.7}
+                      aria-hidden
+                    />
+                  </a>
+                ))}
+              </div>
+              <p className="mt-3 text-xs text-muted">
+                <Ltr>{socials[0].value}</Ltr>
+              </p>
+            </>
+          )}
         </div>
       </div>
     </div>

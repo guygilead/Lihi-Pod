@@ -1,4 +1,5 @@
-import { process } from "@/content/site";
+import { ChevronDown } from "lucide-react";
+import { steps, allSteps, processIntro } from "@/content/process";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Icon } from "@/components/ui/Icon";
@@ -9,9 +10,9 @@ export function Process() {
   return (
     <Section id={SECTION.process} variant="cream">
       <SectionHeading
-        eyebrow={process.eyebrow}
-        title={process.title}
-        lead={process.lead}
+        eyebrow={processIntro.eyebrow}
+        title={processIntro.title}
+        lead={processIntro.lead}
       />
 
       <div className="relative mx-auto mt-14 max-w-3xl">
@@ -20,7 +21,7 @@ export function Process() {
           aria-hidden
         />
         <ol className="space-y-5">
-          {process.steps.map((s, i) => (
+          {steps.map((s, i) => (
             <li key={s.num}>
               <Reveal delay={(i % 3) * 60}>
                 <div className="relative flex gap-5 md:gap-6">
@@ -46,6 +47,32 @@ export function Process() {
             </li>
           ))}
         </ol>
+      </div>
+
+      {/* Full nine-step breakdown, tucked into a native (accessible) accordion */}
+      <div className="mx-auto mt-8 max-w-3xl">
+        <details className="group rounded-2xl border border-line bg-paper/60 px-5 py-4">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold text-ink [&::-webkit-details-marker]:hidden">
+            {processIntro.allStepsLabel}
+            <ChevronDown
+              className="h-5 w-5 shrink-0 text-gold-deep transition-transform duration-300 group-open:rotate-180"
+              aria-hidden
+            />
+          </summary>
+          <ol className="mt-4 space-y-3 border-t border-line pt-4">
+            {allSteps.map((s, i) => (
+              <li key={s.title} className="flex gap-3">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gold-tint text-xs font-bold text-gold-deep">
+                  {i + 1}
+                </span>
+                <div>
+                  <p className="font-semibold text-ink">{s.title}</p>
+                  <p className="text-sm leading-relaxed text-muted">{s.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </details>
       </div>
     </Section>
   );
