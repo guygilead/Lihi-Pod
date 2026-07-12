@@ -1,14 +1,14 @@
 import { credibility } from "@/content/site";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { IconBadge } from "@/components/ui/IconBadge";
 import { Reveal } from "@/components/ui/Reveal";
 import { MicGlyph } from "@/components/visuals/MicGlyph";
 import { SECTION } from "@/lib/nav";
 
-function PortraitPlaceholder() {
+function Portrait() {
   return (
-    // TODO_REPLACE: swap for a real <Image> portrait + a behind-the-scenes shot.
+    // TODO_REPLACE: swap for a real large portrait of Lihi (+ optional small
+    // behind-the-scenes shot). Designed stand-in until real photos arrive.
     <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[var(--radius-card)] bg-gradient-to-b from-charcoal to-charcoal-deep shadow-[var(--shadow-lift)] ring-1 ring-line-dark">
       <div className="absolute -top-16 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-gold/20 blur-3xl" />
       <div className="absolute inset-0 flex items-center justify-center">
@@ -22,10 +22,10 @@ function PortraitPlaceholder() {
           {credibility.portraitCaption}
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
-          <span className="rounded-full bg-cream/10 px-3 py-1 text-xs font-medium text-cream ring-1 ring-cream/15">
+          <span className="rounded-full bg-cream/10 px-3 py-1 text-sm font-medium text-cream ring-1 ring-cream/15">
             ערוץ 1
           </span>
-          <span className="rounded-full bg-cream/10 px-3 py-1 text-xs font-medium text-cream ring-1 ring-cream/15">
+          <span className="rounded-full bg-cream/10 px-3 py-1 text-sm font-medium text-cream ring-1 ring-cream/15">
             כאן 11
           </span>
         </div>
@@ -34,32 +34,33 @@ function PortraitPlaceholder() {
   );
 }
 
+/** Why Lihi (§10) — open editorial layout, no boxed text. */
 export function Credibility() {
   return (
     <Section id={SECTION.about} variant="paper">
-      <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+      <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-5">
-          <PortraitPlaceholder />
+          <Portrait />
         </Reveal>
 
         <div className="lg:col-span-7">
           <SectionHeading
             align="start"
-            eyebrow={credibility.eyebrow}
             title={credibility.title}
             lead={credibility.lead}
           />
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {credibility.points.map((c, i) => (
-              <Reveal key={c.title} delay={i * 60}>
-                <div className="flex h-full items-center gap-3.5 rounded-2xl border border-line bg-cream px-4 py-4">
-                  <IconBadge name={c.icon} size="sm" />
-                  <span className="font-medium text-ink">{c.title}</span>
-                </div>
-              </Reveal>
+          <ul className="mt-9 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+            {credibility.points.map((p) => (
+              <li key={p} className="flex items-center gap-3">
+                <span
+                  className="h-2 w-2 shrink-0 rounded-full bg-gold"
+                  aria-hidden
+                />
+                <span className="text-lg font-medium text-ink">{p}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </Section>

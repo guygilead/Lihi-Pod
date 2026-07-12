@@ -8,42 +8,50 @@ import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 import { SECTION } from "@/lib/nav";
 
+/** Four comparable tracks (§12) — 2×2 grid, ≤5 bullets, per-card CTA. */
 export function Packages() {
   return (
-    <Section id={SECTION.packages} variant="cream">
-      <SectionHeading
-        eyebrow={packagesIntro.eyebrow}
-        title={packagesIntro.title}
-        lead={packagesIntro.lead}
-      />
+    <Section id={SECTION.packages} variant="sand">
+      <SectionHeading title={packagesIntro.title} lead={packagesIntro.lead} />
 
-      <div className="mt-12 grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto mt-14 grid max-w-4xl items-stretch gap-6 md:grid-cols-2">
         {packages.map((p, i) => (
-          <Reveal key={p.name} delay={(i % 4) * 70} className="h-full">
+          <Reveal key={p.name} delay={(i % 2) * 80} className="h-full">
             <div
               className={cn(
-                "flex h-full flex-col rounded-[var(--radius-card)] border bg-paper p-6 shadow-soft",
+                "flex h-full flex-col rounded-[var(--radius-card)] border bg-paper p-7 md:p-8",
                 p.highlight
-                  ? "border-gold/50 ring-1 ring-gold/30"
+                  ? "border-gold/50 shadow-soft ring-1 ring-gold/30"
                   : "border-line",
               )}
             >
-              {p.highlight ? (
-                <span className="mb-4 inline-flex w-fit items-center rounded-full bg-gold-tint px-3 py-1 text-xs font-semibold text-gold-deep">
-                  מומלץ
-                </span>
-              ) : null}
-              <IconBadge name={p.icon} tone={p.highlight ? "gold" : "outline"} />
-              <h3 className="mt-4 font-serif text-xl font-bold text-ink">
-                {p.name}
-              </h3>
-              <p className="mt-1.5 text-sm text-muted">{p.tagline}</p>
+              <div className="flex items-center gap-4">
+                <IconBadge name={p.icon} tone={p.highlight ? "gold" : "outline"} />
+                <div>
+                  <h3 className="font-serif text-2xl font-bold text-ink">
+                    {p.name}
+                  </h3>
+                  {p.highlight && (
+                    <span className="mt-1 inline-flex items-center rounded-full bg-gold-tint px-2.5 py-0.5 text-sm font-semibold text-gold-deep">
+                      מומלץ
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <p className="mt-4 text-base text-muted">
+                <span className="font-semibold text-ink">מתאים ל: </span>
+                {p.fitFor}
+              </p>
 
               <ul className="mt-5 flex-1 space-y-2.5">
                 {p.includes.map((it) => (
-                  <li key={it} className="flex items-start gap-2 text-sm text-ink">
+                  <li
+                    key={it}
+                    className="flex items-start gap-2.5 text-base text-ink"
+                  >
                     <CheckCircle2
-                      className="mt-0.5 h-4 w-4 shrink-0 text-gold-deep"
+                      className="mt-1 h-4 w-4 shrink-0 text-gold-deep"
                       strokeWidth={1.8}
                       aria-hidden
                     />
@@ -55,7 +63,7 @@ export function Packages() {
               <Button
                 href={p.ctaHref}
                 variant={p.highlight ? "gold" : "secondary"}
-                className="mt-6 w-full"
+                className="mt-7 w-full"
                 analyticsEvent="package_cta_click"
                 analyticsParams={{ package: p.name }}
               >
@@ -66,7 +74,7 @@ export function Packages() {
         ))}
       </div>
 
-      <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-muted">
+      <p className="mx-auto mt-8 max-w-[650px] text-center text-base text-muted">
         {packagesIntro.note}
       </p>
     </Section>

@@ -4,14 +4,14 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { ViewTracker } from "@/components/ui/ViewTracker";
 import { FeaturedEpisode } from "@/components/visuals/FeaturedEpisode";
-import { show, featuredEpisode, episodeOutputs } from "@/content/episodes";
-import { ctaPrimary } from "@/content/site";
+import { show, featuredEpisode } from "@/content/episodes";
+import { caseStudy, ctaPrimary } from "@/content/site";
 import { SECTION } from "@/lib/nav";
 
-/** SABONcast — flagship case study, placed high in the page (§5.6 / §6.4). */
+/** SABONcast — the central case study on a near-black band (§8). */
 export function FeaturedCaseStudy() {
   return (
-    <Section id={SECTION.caseStudy} variant="charcoal">
+    <Section id={SECTION.work} variant="charcoal">
       <ViewTracker event="case_study_view" params={{ show: show.name }} />
 
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
@@ -22,42 +22,30 @@ export function FeaturedCaseStudy() {
         <div className="order-1 lg:order-2">
           <span className="inline-flex items-center gap-2.5 text-sm font-semibold tracking-[0.02em] text-gold-soft">
             <span className="h-px w-7 bg-current opacity-50" aria-hidden />
-            עבודת הדגל · {show.name}
+            {caseStudy.eyebrow} · {show.name}
           </span>
-          <h2 className="mt-4 font-serif text-3xl font-bold text-cream md:text-4xl">
-            SABONcast: סיפור ארגוני שהפך לסדרת שיחות
+          <h2 className="mt-4 font-serif text-3xl font-bold text-balance text-cream md:text-[2.75rem] md:leading-[1.12]">
+            {caseStudy.title}
           </h2>
-          <p className="mt-3 text-lg text-muted-light">
-            {show.tagline}, שחושפת את הידע, התרבות והסיפורים שמאחורי המותג.
-          </p>
-          <p className="mt-5 leading-relaxed text-muted-light">
-            SABONcast נבנה כדי להביא לקדמת הבמה את האנשים, הידע והסיפורים שמאחורי
-            מותג גלובלי. כל פרק חיבר בין סיפור אישי, תובנות מקצועיות והתרבות
-            הארגונית של החברה, והפך לשיחה שניתן לצרוך כפרק מלא וכחומר תוכן לערוצים
-            נוספים.
+          <p className="mt-5 max-w-[650px] text-lg leading-relaxed text-muted-light">
+            {caseStudy.text}
           </p>
 
-          <div className="mt-7">
-            <p className="text-sm font-semibold text-cream">מה נוצר מכל פרק</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {episodeOutputs.map((o) => (
-                <span
-                  key={o}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-charcoal-deep px-3 py-1.5 text-sm text-cream ring-1 ring-line-dark"
-                >
-                  <CheckCircle2
-                    className="h-3.5 w-3.5 text-gold-soft"
-                    aria-hidden
-                  />
-                  {o}
-                </span>
-              ))}
-            </div>
+          <div className="mt-7 flex flex-wrap gap-2">
+            {caseStudy.outputs.map((o) => (
+              <span
+                key={o}
+                className="inline-flex items-center gap-1.5 rounded-full bg-charcoal-deep px-3.5 py-1.5 text-base text-cream ring-1 ring-line-dark"
+              >
+                <CheckCircle2 className="h-4 w-4 text-gold-soft" aria-hidden />
+                {o}
+              </span>
+            ))}
           </div>
 
-          <div className="mt-8">
+          <div className="mt-9">
             <Button href={ctaPrimary.href} variant="gold" size="lg">
-              כך יכול להיראות הפודקאסט של החברה שלכם
+              {caseStudy.ctaLabel}
             </Button>
           </div>
         </div>

@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section
       id={SECTION.hero}
-      className="relative overflow-hidden bg-cream pt-12 pb-24 md:pt-20 md:pb-28"
+      className="relative flex overflow-hidden bg-cream pt-10 pb-20 md:pt-16 md:pb-24 lg:min-h-[88vh] lg:items-center"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -start-24 -top-24 h-72 w-72 rounded-full bg-gold/10 blur-3xl" />
@@ -17,22 +17,23 @@ export function Hero() {
       </div>
 
       <Container className="relative">
-        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-10">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-12">
+          {/* Copy — right side in RTL */}
           <div className="text-center lg:text-start">
             <span className="inline-flex items-center gap-2 rounded-full bg-paper px-4 py-1.5 text-sm font-medium text-gold-deep shadow-soft ring-1 ring-line">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" />
               {hero.eyebrow}
             </span>
 
-            <h1 className="mt-6 font-serif text-[2.1rem] leading-[1.13] font-bold text-balance text-ink sm:text-5xl lg:text-[3.3rem]">
+            <h1 className="mt-6 font-serif text-[2.5rem] leading-[1.1] font-bold text-balance text-ink sm:text-5xl lg:text-[4.25rem]">
               {hero.title}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted lg:mx-0">
+            <p className="mx-auto mt-6 max-w-[650px] text-lg leading-relaxed text-muted md:text-xl lg:mx-0">
               {hero.subtitle}
             </p>
 
-            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
+            <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
               <Button
                 href={ctaPrimary.href}
                 variant="primary"
@@ -53,27 +54,16 @@ export function Hero() {
               </Button>
             </div>
 
-            <p className="mt-5 flex items-center justify-center gap-2 text-sm text-muted lg:justify-start">
+            <p className="mt-5 flex items-center justify-center gap-2 text-base text-muted lg:justify-start">
               <span className="inline-block h-px w-6 bg-gold/50" aria-hidden />
               {hero.microcopy}
             </p>
           </div>
 
+          {/* Real media — left side in RTL */}
           <div className="lg:ps-6">
             <HeroVisual />
           </div>
-        </div>
-
-        {/* Trust strip — five capabilities */}
-        <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-3 lg:grid-cols-5">
-          {hero.trust.map((t) => (
-            <div
-              key={t}
-              className="flex items-center justify-center bg-paper px-4 py-5 text-center"
-            >
-              <p className="text-sm font-semibold text-ink">{t}</p>
-            </div>
-          ))}
         </div>
       </Container>
     </section>

@@ -130,12 +130,11 @@ export function ContactForm() {
             <SectionHeading
               align="start"
               tone="light"
-              eyebrow={contact.eyebrow}
               title={contact.title}
               lead={contact.text}
             />
 
-            <p className="mt-6 flex items-center gap-2 text-sm text-muted-light">
+            <p className="mt-6 flex items-center gap-2 text-base text-muted-light">
               <span className="inline-block h-px w-6 bg-gold-soft/60" aria-hidden />
               {contact.microcopy}
             </p>
@@ -259,7 +258,7 @@ export function ContactForm() {
                   </Field>
                   <Field
                     as="textarea"
-                    label="הודעה חופשית"
+                    label="הודעה"
                     name="message"
                     value={values.message}
                     onChange={update}
