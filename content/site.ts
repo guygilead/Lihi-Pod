@@ -80,12 +80,12 @@ export const socials: SocialLink[] = buildSocials();
 
 export const ctaPrimary: Cta = {
   label: "לתיאום שיחת אפיון",
-  href: `#${SECTION.contact}`,
+  href: `/#${SECTION.contact}`,
 };
 
 export const ctaSecondary: Cta = {
   label: "לצפייה בפרק לדוגמה",
-  href: `#${SECTION.work}`,
+  href: `/#${SECTION.work}`,
 };
 
 export const hero = {

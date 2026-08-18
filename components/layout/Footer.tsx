@@ -72,10 +72,16 @@ export function Footer() {
           )}
         </div>
 
-        <div className="mt-12 border-t border-line-dark pt-6 text-base text-muted-light">
+        <div className="mt-12 flex flex-col gap-2 border-t border-line-dark pt-6 text-base text-muted-light sm:flex-row sm:items-center sm:justify-between">
           <p>
             © <Ltr>{year}</Ltr> {siteConfig.name}. כל הזכויות שמורות.
           </p>
+          <a
+            href="/privacy"
+            className="transition-colors hover:text-gold-soft"
+          >
+            מדיניות פרטיות
+          </a>
         </div>
       </div>
     </footer>

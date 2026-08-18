@@ -10,6 +10,8 @@ const schema = z.object({
   email: z.email(),
   interest: z.string().trim().max(80).optional().default(""),
   message: z.string().trim().max(4000).optional().default(""),
+  // Privacy-policy consent is mandatory (checkbox in the form).
+  consent: z.literal(true),
   // Honeypot — real users leave this empty.
   company_url: z.string().max(200).optional().default(""),
 });

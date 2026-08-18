@@ -20,7 +20,7 @@ export const packages: Package[] = [
       "הקלטה ועריכה",
     ],
     ctaLabel: "לבניית פרק פיילוט",
-    ctaHref: `#${SECTION.contact}`,
+    ctaHref: `/#${SECTION.contact}`,
   },
   {
     icon: "video",
@@ -34,7 +34,7 @@ export const packages: Package[] = [
       "טקסטים לפרסום",
     ],
     ctaLabel: "לתכנון סדרה",
-    ctaHref: `#${SECTION.contact}`,
+    ctaHref: `/#${SECTION.contact}`,
     highlight: true,
   },
   {
@@ -49,7 +49,7 @@ export const packages: Package[] = [
       "הפקה שוטפת",
     ],
     ctaLabel: "לבניית ערוץ תוכן",
-    ctaHref: `#${SECTION.contact}`,
+    ctaHref: `/#${SECTION.contact}`,
   },
   {
     icon: "internal",
@@ -63,6 +63,6 @@ export const packages: Package[] = [
       "אפשרות להפצה סגורה",
     ],
     ctaLabel: "לתכנון פודקאסט פנימי",
-    ctaHref: `#${SECTION.contact}`,
+    ctaHref: `/#${SECTION.contact}`,
   },
 ];

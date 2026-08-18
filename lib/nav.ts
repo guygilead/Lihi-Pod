@@ -15,10 +15,10 @@ export const SECTION = {
 } as const;
 
 export const navLinks: NavLink[] = [
-  { label: "עבודות", href: `#${SECTION.work}` },
-  { label: "למי זה מתאים", href: `#${SECTION.useCases}` },
-  { label: "התהליך", href: `#${SECTION.process}` },
-  { label: "על ליהיא", href: `#${SECTION.about}` },
-  { label: "מסלולים", href: `#${SECTION.packages}` },
-  { label: "שאלות", href: `#${SECTION.faq}` },
+  { label: "עבודות", href: `/#${SECTION.work}` },
+  { label: "למי זה מתאים", href: `/#${SECTION.useCases}` },
+  { label: "התהליך", href: `/#${SECTION.process}` },
+  { label: "על ליהיא", href: `/#${SECTION.about}` },
+  { label: "מסלולים", href: `/#${SECTION.packages}` },
+  { label: "שאלות", href: `/#${SECTION.faq}` },
 ];
