@@ -4,6 +4,7 @@ import { frank, assistant } from "./fonts";
 import { siteMetadata, SITE_URL } from "./metadata";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 import { faqs } from "@/content/faqs";
 import { show, episodes } from "@/content/episodes";
 import { contactDetails } from "@/content/site";
@@ -79,14 +80,15 @@ export default function RootLayout({
     >
       <body className="min-h-full antialiased">
         <a
-          href="#hero"
+          href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:text-cream"
         >
           דילוג לתוכן
         </a>
         <Header />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <Footer />
+        <CookieBanner />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

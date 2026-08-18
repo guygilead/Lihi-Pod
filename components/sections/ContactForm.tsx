@@ -19,6 +19,8 @@ type Values = {
   email: string;
   interest: string;
   message: string;
+  /** Privacy-policy consent — required before sending. */
+  consent: boolean;
   /** Honeypot — must stay empty for real users. */
   company_url: string;
 };
@@ -31,6 +33,7 @@ const initial: Values = {
   email: "",
   interest: "",
   message: "",
+  consent: false,
   company_url: "",
 };
 
@@ -43,6 +46,7 @@ function validate(v: Values) {
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email))
     errs.email = "כתובת המייל אינה תקינה";
   if (!v.message.trim()) errs.message = "נא לכתוב הודעה קצרה";
+  if (!v.consent) errs.consent = "כדי לשלוח את הפנייה יש לאשר את מדיניות הפרטיות";
   return errs;
 }
 
@@ -84,8 +88,12 @@ export function ContactForm() {
       started.current = true;
       track("form_start");
     }
-    const { name, value } = e.target;
-    setValues((v) => ({ ...v, [name]: value }));
+    const target = e.target as HTMLInputElement;
+    const { name, value, type } = target;
+    setValues((v) => ({
+      ...v,
+      [name]: type === "checkbox" ? target.checked : value,
+    }));
   };
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -268,6 +276,49 @@ export function ContactForm() {
                     rows={4}
                     className="sm:col-span-2"
                   />
+                </div>
+
+                {/* Privacy-policy consent (required) */}
+                <div className="mt-5">
+                  <div className="flex items-start gap-3">
+                    <input
+                      id="consent"
+                      name="consent"
+                      type="checkbox"
+                      checked={values.consent}
+                      onChange={update}
+                      required
+                      aria-invalid={!!errors.consent}
+                      aria-describedby={
+                        errors.consent ? "consent-error" : undefined
+                      }
+                      className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded accent-gold"
+                    />
+                    <label
+                      htmlFor="consent"
+                      className="cursor-pointer text-base leading-relaxed text-ink"
+                    >
+                      קראתי ואני מסכים/ה ל
+                      <a
+                        href="/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-gold-deep underline underline-offset-4 transition-colors hover:text-ink"
+                      >
+                        מדיניות הפרטיות
+                      </a>
+                      .
+                    </label>
+                  </div>
+                  {errors.consent && (
+                    <p
+                      id="consent-error"
+                      role="alert"
+                      className="mt-1.5 text-sm text-red-600"
+                    >
+                      {errors.consent}
+                    </p>
+                  )}
                 </div>
 
                 {/* Honeypot — hidden from users, catches naive bots */}

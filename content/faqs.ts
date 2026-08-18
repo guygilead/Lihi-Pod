@@ -3,7 +3,7 @@ import { SECTION } from "@/lib/nav";
 
 export const faqIntro = {
   title: "שאלות לפני שמתחילים",
-  followUp: { label: "נשארה שאלה? לתיאום שיחה", href: `#${SECTION.contact}` },
+  followUp: { label: "נשארה שאלה? לתיאום שיחה", href: `/#${SECTION.contact}` },
 };
 
 /** Exactly eight questions (§13). */
